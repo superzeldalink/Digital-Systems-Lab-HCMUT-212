@@ -1,4 +1,4 @@
-# Digital-Systems-Lab-HCMUT-212\
+# Digital-Systems-Lab-HCMUT-212
 
 Ho Chi Minh City University of Technology
 Subject : Digital Systems (Lab)
