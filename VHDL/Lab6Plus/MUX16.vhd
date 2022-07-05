@@ -1,0 +1,19 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+ENTITY MUX16 IS
+    PORT (
+        SIGNAL prod, PC : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        SIGNAL sel : IN INTEGER RANGE 0 TO 1;
+        SIGNAL MUXout : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+    );
+END MUX16;
+
+ARCHITECTURE arch OF MUX16 IS
+BEGIN
+    WITH sel SELECT
+        MUXout <=
+        prod WHEN 0,
+        PC WHEN 1;
+END ARCHITECTURE;

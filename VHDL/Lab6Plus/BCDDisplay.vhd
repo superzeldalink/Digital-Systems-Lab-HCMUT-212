@@ -1,0 +1,32 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+
+ENTITY BCDDisplay IS
+	PORT (
+		V : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+        HEX5, HEX4, HEX3, HEX2, HEX1, HEX0 : OUT STD_LOGIC_VECTOR(0 TO 6)
+	);
+END ENTITY;
+
+ARCHITECTURE behave OF BCDDisplay IS
+	SIGNAL digit4, digit3, digit2, digit1, digit0 : STD_LOGIC_VECTOR(3 DOWNTO 0);
+	COMPONENT BCD IS
+		PORT (
+			c : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+			HEXn : OUT STD_LOGIC_VECTOR(0 TO 6)
+		);
+	END COMPONENT;
+BEGIN
+	digit4 <= STD_LOGIC_VECTOR((unsigned(V) / 10000) MOD 10)(3 DOWNTO 0);
+	digit3 <= STD_LOGIC_VECTOR((unsigned(V) / 1000) MOD 10)(3 DOWNTO 0);
+	digit2 <= STD_LOGIC_VECTOR((unsigned(V) / 100) MOD 10)(3 DOWNTO 0);
+	digit1 <= STD_LOGIC_VECTOR((unsigned(V) / 10) MOD 10)(3 DOWNTO 0);
+	digit0 <= STD_LOGIC_VECTOR(unsigned(V) MOD 10)(3 DOWNTO 0);
+	HEX5 <= "1111111";
+	HEXn4 : BCD PORT MAP(digit4, HEX4);
+	HEXn3 : BCD PORT MAP(digit3, HEX3);
+	HEXn2 : BCD PORT MAP(digit2, HEX2);
+	HEXn1 : BCD PORT MAP(digit1, HEX1);
+	HEXn0 : BCD PORT MAP(digit0, HEX0);
+END ARCHITECTURE;
